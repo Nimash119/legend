@@ -1,0 +1,24 @@
+
+{% extends "base.html" %}
+{% block content %}
+    <section>
+        <img src="{{ url_for('static', filename='images/your_image.jpg') }}" alt="Изображение" style="max-width: 100%; height: auto;">
+    </section>
+    <section>
+        <h2>Отзывы</h2>
+        {% for username, content in reviews %}
+            <div class="review">
+                <strong>{{ username }}</strong>: {{ content }}
+            </div>
+        {% endfor %}
+    </section>
+    {% if 'username' in session %}
+    <section>
+        <h3>Добавить отзыв</h3>
+        <form method="POST" action="/add_review">
+            <textarea name="content" required></textarea><br>
+            <button type="submit">Отправить</button>
+        </form>
+    </section>
+    {% endif %}
+{% endblock %}
